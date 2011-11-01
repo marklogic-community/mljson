@@ -1,8 +1,8 @@
-if(typeof mljson == "undefined" || !mljson) {
-    mljson = {};
+if(typeof corona == "undefined" || !corona) {
+    corona = {};
 }
 
-mljson.dates = [
+corona.dates = [
     {
         "string": "2011-07-07T11:05:42-07:00",
         "value": "2011-07-07T11:05:42-07:00"
@@ -34,6 +34,22 @@ mljson.dates = [
     {
         "string": "Mon, 23 Sep 0102 23:14:26 +0900",
         "value": "2002-09-23T23:14:26+09:00"
+    },
+    {
+        "string": "08/20/2007 5:58:20 AM",
+        "value": "2007-08-20T05:58:20-07:00"
+    },
+    {
+        "string": "08/20/2007 5:58:20 pm",
+        "value": "2007-08-20T17:58:20-07:00"
+    },
+    {
+        "string": "08/20/2007 5:58:20 Pm",
+        "value": "2007-08-20T17:58:20-07:00"
+    },
+    {
+        "string": "08/20/2007 5:58:20 P.m.",
+        "value": "2007-08-20T17:58:20-07:00"
     },
     {
         "string": "2011-07-07",
@@ -79,13 +95,13 @@ mljson.dates = [
 
 $(document).ready(function() {
     module("Dates");
-    for (var i = 0; i < mljson.dates.length; i += 1) {
-        mljson.jsonFromServerTest(mljson.dates[i]);
+    for (var i = 0; i < corona.dates.length; i += 1) {
+        corona.jsonFromServerTest(corona.dates[i]);
     }
 });
 
 
-mljson.jsonFromServer = function(test, success, error) {
+corona.jsonFromServer = function(test, success, error) {
     asyncTest("Parsing: " + test.string, function() {
         $.ajax({
             url: '/test/xq/parsedate.xqy',
@@ -98,8 +114,8 @@ mljson.jsonFromServer = function(test, success, error) {
     });
 };
 
-mljson.jsonFromServerTest = function(test) {
-    mljson.jsonFromServer(test,
+corona.jsonFromServerTest = function(test) {
+    corona.jsonFromServer(test,
         function(data, t, j) {
             equals(data, test.value, "Parsed date doesn't match");
         },
